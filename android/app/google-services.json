@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "671669782391",
+    "project_id": "diu-teacher-initial-app",
+    "storage_bucket": "diu-teacher-initial-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671669782391:android:2b534c73d0c2e67b854372",
+        "android_client_info": {
+          "package_name": "com.example.diu_teacher_initial_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671669782391-epsnt59i5huvqar6a3reao3vusp67p3h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJAZkHdlgH2D3lHfhu6OT-xVJaqYO3Ls4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671669782391-epsnt59i5huvqar6a3reao3vusp67p3h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
