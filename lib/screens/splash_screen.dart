@@ -37,9 +37,11 @@ class _AppSplashScreenState extends State<AppSplashScreen>
       _animationController.stop();
     });
     Future.delayed(const Duration(milliseconds: 3000), () {
-      setState(() {
+      if(mounted) {
+        setState(() {
         Get.offNamed(AppRoutesConstant.login);
       });
+      }
     });
   }
 

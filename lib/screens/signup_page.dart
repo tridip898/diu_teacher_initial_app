@@ -2,6 +2,7 @@ import 'package:diu_teacher_initial_app/constants/app_colors.dart';
 import 'package:diu_teacher_initial_app/constants/app_pages_constant.dart';
 import 'package:diu_teacher_initial_app/constants/app_style.dart';
 import 'package:diu_teacher_initial_app/constants/app_widgets.dart';
+import 'package:diu_teacher_initial_app/controller/auth_controller.dart';
 import 'package:diu_teacher_initial_app/controller/signup_controller.dart';
 import 'package:diu_teacher_initial_app/widgets/app_textfield.dart';
 import 'package:flutter/gestures.dart';
@@ -13,7 +14,11 @@ import '../constants/app_constant.dart';
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
 
-  final signupController = Get.put(SignupController());
+  final emailController = TextEditingController(),
+      usernameController = TextEditingController(),
+      passwordController = TextEditingController();
+
+  final signupFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +56,14 @@ class SignupPage extends StatelessWidget {
                 ),
                 AppWidgets().gapH20(),
                 Form(
-                  key: signupController.signupFormKey,
+                  key: signupFormKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppTextFormField(
                         title: 'Email',
                         hintText: 'Enter your email',
-                        controller: signupController.emailController,
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         prefixIcon: const Icon(Icons.email_outlined),
                         validator: (value) {
@@ -72,7 +77,7 @@ class SignupPage extends StatelessWidget {
                       AppTextFormField(
                         title: 'Username',
                         hintText: 'Enter your name',
-                        controller: signupController.usernameController,
+                        controller: usernameController,
                         keyboardType: TextInputType.name,
                         prefixIcon: const Icon(Icons.person_outline_rounded),
                         validator: (value) {
@@ -86,7 +91,7 @@ class SignupPage extends StatelessWidget {
                       AppTextFormField(
                         title: 'Password',
                         hintText: 'Enter your password',
-                        controller: signupController.passwordController,
+                        controller: passwordController,
                         keyboardType: TextInputType.text,
                         prefixIcon: const Icon(Icons.lock_outline_rounded),
                         obscureText: true,
@@ -103,9 +108,15 @@ class SignupPage extends StatelessWidget {
                         alignment: Alignment.center,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (signupController.signupFormKey.currentState!
-                                .validate()) {
-                            } else {}
+                            AuthController.instance.registerUser(emailController.text.trim(), passwordController.text.trim());
+                            // if(AuthController.instance.user.value != null){
+                            //   Get.toNamed(AppRoutesConstant.login);
+                            // }
+                            // if (signupFormKey.currentState!.validate()) {
+                            //   AuthController.instance.registerUser(emailController.text.trim(), passwordController.text.trim());
+                            // } else {
+                            //   logger.e("There is an error");
+                            // }
                           },
                           style: ElevatedButton.styleFrom(
                             minimumSize:
@@ -140,7 +151,8 @@ class SignupPage extends StatelessWidget {
                               color: AppColors.purple,
                             ),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => Get.toNamed(AppRoutesConstant.login))
+                              ..onTap =
+                                  () => Get.toNamed(AppRoutesConstant.login))
                       ],
                     ),
                   ),

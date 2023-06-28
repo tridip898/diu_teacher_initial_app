@@ -1,4 +1,5 @@
 import 'package:diu_teacher_initial_app/constants/app_pages_constant.dart';
+import 'package:diu_teacher_initial_app/controller/auth_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +16,10 @@ import '../widgets/app_textfield.dart';
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
-  final signInController = Get.put(SignInController());
+  final emailController = TextEditingController(),
+      passwordController = TextEditingController();
+
+  final signInFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
                 Form(
-                  key: signInController.signInFormKey,
+                  key: signInFormKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -60,7 +64,7 @@ class SignInScreen extends StatelessWidget {
                       AppTextFormField(
                         title: 'Email',
                         hintText: 'Enter your email',
-                        controller: signInController.usernameController,
+                        controller: emailController,
                         keyboardType: TextInputType.name,
                         prefixIcon: const Icon(Icons.email_outlined),
                         validator: (value) {
@@ -74,7 +78,7 @@ class SignInScreen extends StatelessWidget {
                       AppTextFormField(
                         title: 'Password',
                         hintText: 'Enter your password',
-                        controller: signInController.passwordController,
+                        controller: passwordController,
                         keyboardType: TextInputType.text,
                         prefixIcon: const Icon(Icons.lock_outline_rounded),
                         obscureText: true,
@@ -91,9 +95,13 @@ class SignInScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (signInController.signInFormKey.currentState!
-                                .validate()) {
-                            } else {}
+                            AuthController.instance.signInUser(emailController.text.trim(), passwordController.text.trim());
+                            // if(AuthController.instance.user.value != null){
+                            //   Get.toNamed(AppRoutesConstant.homePage);
+                            // }
+                            // if (signInFormKey.currentState!
+                            //     .validate()) {
+                            // } else {}
                           },
                           style: ElevatedButton.styleFrom(
                             minimumSize:
