@@ -26,4 +26,6 @@ EdgeInsets.symmetric(horizontal: mainPaddingW);
 
 EdgeInsets mainPaddingVertical = EdgeInsets.symmetric(vertical: mainPaddingH);
 
-const boxRadius = 8.0;
+BorderRadius cornerRadius(double boxRadius){
+  return BorderRadius.circular(boxRadius);
+}

@@ -20,7 +20,7 @@ class AppColors {
   );
 
   //tridip
-  static const splashBackground = Color(0xfff7f7f7);
+  static const splashBackground = Color(0xffffffff);
   static const dividerColor = Color(0xFF82868A);
   static const tabButton = Color(0xFFC4D7B2);
 
@@ -39,6 +39,7 @@ class AppColors {
   static const purple = Color(0xFF5C3BFF);
   static const deepBlue = Color(0xFF000000);
   static const blackPure = Color(0xFF000000);
+  static const blackShadow = Color(0xFF151414);
   static const white = Color(0xFFF8F8F8);
   static const whitePure = Color(0xFFFFFFFF);
   static const grey = Color(0xFF52596E);

@@ -1,5 +1,8 @@
-import 'package:diu_teacher_initial_app/contants/app_pages_constant.dart';
+import 'package:diu_teacher_initial_app/constants/app_pages_constant.dart';
+import 'package:diu_teacher_initial_app/screens/home_screen.dart';
+import 'package:diu_teacher_initial_app/screens/signin_screen.dart';
 import 'package:diu_teacher_initial_app/screens/signup_page.dart';
+import 'package:diu_teacher_initial_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -33,10 +36,14 @@ class MyApp extends StatelessWidget {
       builder: (context, index) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutesConstant.signup,
+          initialRoute: AppRoutesConstant.splash,
           getPages: [
             GetPage(
-                name: AppRoutesConstant.signup, page: () => const SignupPage())
+                name: AppRoutesConstant.splash,
+                page: () => const AppSplashScreen()),
+            GetPage(name: AppRoutesConstant.signup, page: () => SignupPage()),
+            GetPage(name: AppRoutesConstant.login, page: () => SignInScreen()),
+            GetPage(name: AppRoutesConstant.homePage, page: () => const HomeScreen()),
           ],
         );
       },
