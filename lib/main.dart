@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'constants/app_colors.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutesConstant.splash,
+          theme: ThemeData(
+            primarySwatch: AppColors.colorPrimarySwatch,
+          ),
           getPages: [
             GetPage(
                 name: AppRoutesConstant.splash,

@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../constants/app_colors.dart';
 import '../constants/app_constant.dart';
 import '../constants/app_style.dart';
 import '../constants/app_widgets.dart';
-import '../controller/signin_controller.dart';
 import '../widgets/app_textfield.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -83,7 +81,7 @@ class SignInScreen extends StatelessWidget {
                         prefixIcon: const Icon(Icons.lock_outline_rounded),
                         obscureText: true,
                         validator: (value) {
-                          if (value!.isNotEmpty && value.length <= 8) {
+                          if (value!.isNotEmpty && value.length >= 6) {
                             return null;
                           } else {
                             return "Please enter valid password";
@@ -95,7 +93,9 @@ class SignInScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         child: ElevatedButton(
                           onPressed: () {
-                            AuthController.instance.signInUser(emailController.text.trim(), passwordController.text.trim());
+                            AuthController.instance.signInUser(
+                                emailController.text.trim(),
+                                passwordController.text.trim());
                             // if(AuthController.instance.user.value != null){
                             //   Get.toNamed(AppRoutesConstant.homePage);
                             // }
@@ -122,7 +122,7 @@ class SignInScreen extends StatelessWidget {
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      text: "Don\'t have an account?  ",
+                      text: "Don't have an account?  ",
                       style: textHeaderStyle(
                           fontSize: 22,
                           color: AppColors.blackPure,
@@ -136,7 +136,8 @@ class SignInScreen extends StatelessWidget {
                               color: AppColors.purple,
                             ),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => Get.toNamed(AppRoutesConstant.signup))
+                              ..onTap =
+                                  () => Get.toNamed(AppRoutesConstant.signup))
                       ],
                     ),
                   ),
@@ -152,40 +153,38 @@ class SignInScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           color: AppColors.grey),
                     ),
-                    Text(
-                      "Sign in with",
-                      style: textRegularStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.grey),
-                    ),
-                    AppWidgets().gapH16(),
+                    AppWidgets().gapH12(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          height: 55.h,
-                          width: 55.w,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage("assets/png/google.png"),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        AppWidgets().gapW12(),
-                        Container(
-                          height: 55.h,
-                          width: 55.w,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage("assets/png/facebook.png"),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
+                        GestureDetector(
+                            onTap: () {
+                              AuthController.instance.signInWithGoogle();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  border: Border.all(
+                                      color: AppColors.white, width: 1),
+                                  borderRadius: cornerRadius(30)),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/png/google.png",
+                                    height: 35.h,
+                                  ),
+                                  AppWidgets().gapW16(),
+                                  Text(
+                                    "Sign in with Google",
+                                    style: textRegularStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.grey),
+                                  ),
+                                ],
+                              ),
+                            )),
                       ],
                     )
                   ],

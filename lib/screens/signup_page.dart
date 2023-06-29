@@ -84,7 +84,7 @@ class SignupPage extends StatelessWidget {
                           if (GetUtils.isUsername(value!)) {
                             return null;
                           } else {
-                            return "Please enter a valid email";
+                            return "Please enter a valid username";
                           }
                         },
                       ),
@@ -96,7 +96,7 @@ class SignupPage extends StatelessWidget {
                         prefixIcon: const Icon(Icons.lock_outline_rounded),
                         obscureText: true,
                         validator: (value) {
-                          if (value!.isNotEmpty && value.length <= 8) {
+                          if (value!.isNotEmpty && value.length >= 6) {
                             return null;
                           } else {
                             return "Please enter valid password";
