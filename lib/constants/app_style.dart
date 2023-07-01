@@ -42,7 +42,7 @@ TextStyle normalTextStyle({
   color = AppColors.blackPure,
   double fontSize = 14,
   fontWeight = FontWeight.w400,
-  lineHeight = 1.1,
+  lineHeight = 0.5,
   letterSpacing = 0.0,
   isColorWhite = false,
   isPrimaryColor = false,
@@ -59,14 +59,14 @@ TextStyle normalTextStyle({
     color: isPrimaryColor
         ? AppColors.primaryColor
         : isColorWhite
-        ? AppColors.white
-        : color,
+            ? AppColors.white
+            : color,
     fontWeight: isFontNormal
         ? FontWeight.normal
         : isFontWeight500
-        ? FontWeight.w500
-        : fontWeight,
-    height: isNormalLineHeight ? 1.0 : lineHeight,
+            ? FontWeight.w500
+            : fontWeight,
+    height: isNormalLineHeight ? 0.5 : lineHeight,
     letterSpacing: isNormalLineSpacing ? 0.0 : letterSpacing,
   );
 }

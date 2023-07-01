@@ -14,7 +14,7 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
 
   //email,password,name
-  late Rx<User?> _user;
+  late Rx<User?> user;
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -25,19 +25,19 @@ class AuthController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    _user = Rx<User?>(auth.currentUser);
+    user = Rx<User?>(auth.currentUser);
     //our user will be notified
-    _user.bindStream(auth.userChanges());
-    ever(_user, _initialScreen);
+    user.bindStream(auth.userChanges());
+    ever(user, _initialScreen);
   }
 
   _initialScreen(User? user) {
     if (user == null) {
       logger.i("Go to login page");
-      Get.offAll(() => const AppSplashScreen());
+      Get.offAll(() => SignInScreen());
     } else {
       logger.i("Go to home screen");
-      Get.offAll(() => SignInScreen());
+      Get.offAll(() => HomeScreen());
     }
   }
 
@@ -63,7 +63,7 @@ class AuthController extends GetxController {
   void signInUser(String email, String password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-      Get.offAll(() => const HomeScreen());
+      //Get.offAll(() => HomeScreen());
     } catch (e) {
       Get.snackbar("About login", "Login message",
           backgroundColor: AppColors.red,
@@ -87,7 +87,7 @@ class AuthController extends GetxController {
           accessToken: gAuth.accessToken, idToken: gAuth.idToken);
 
       return await auth.signInWithCredential(credential).then((value) {
-        Get.offAll(() => const HomeScreen());
+        Get.offAll(() => HomeScreen());
       });
     } catch (e) {
       Get.snackbar("About Google Sign In", "Google Sign In message",

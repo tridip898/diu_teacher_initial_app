@@ -95,7 +95,7 @@ class AppWidgets {
     return const Divider(
       color: AppColors.dividerColor,
       height: 10,
-      thickness: 0.2,
+      thickness: 1,
     );
   }
 

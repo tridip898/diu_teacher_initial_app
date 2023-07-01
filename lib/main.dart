@@ -4,6 +4,8 @@ import 'package:diu_teacher_initial_app/screens/home_screen.dart';
 import 'package:diu_teacher_initial_app/screens/signin_screen.dart';
 import 'package:diu_teacher_initial_app/screens/signup_page.dart';
 import 'package:diu_teacher_initial_app/screens/splash_screen.dart';
+import 'package:diu_teacher_initial_app/screens/teacher_details.dart';
+import 'package:diu_teacher_initial_app/screens/teacher_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -48,9 +50,13 @@ class MyApp extends StatelessWidget {
                 page: () => const AppSplashScreen()),
             GetPage(name: AppRoutesConstant.signup, page: () => SignupPage()),
             GetPage(name: AppRoutesConstant.login, page: () => SignInScreen()),
+            GetPage(name: AppRoutesConstant.homePage, page: () => HomeScreen()),
             GetPage(
-                name: AppRoutesConstant.homePage,
-                page: () => const HomeScreen()),
+                name: AppRoutesConstant.teachersList,
+                page: () => const TeacherListPage()),
+            GetPage(
+                name: AppRoutesConstant.teacherDetails,
+                page: () => const TeacherDetailsPage()),
           ],
         );
       },

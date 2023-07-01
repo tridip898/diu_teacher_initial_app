@@ -1,13 +1,20 @@
 import 'package:diu_teacher_initial_app/constants/app_colors.dart';
+import 'package:diu_teacher_initial_app/constants/app_constant.dart';
+import 'package:diu_teacher_initial_app/constants/app_pages_constant.dart';
 import 'package:diu_teacher_initial_app/constants/app_style.dart';
 import 'package:diu_teacher_initial_app/constants/app_widgets.dart';
 import 'package:diu_teacher_initial_app/controller/auth_controller.dart';
+import 'package:diu_teacher_initial_app/controller/home_controller.dart';
+import 'package:diu_teacher_initial_app/models/teacher_initial_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +70,73 @@ class HomeScreen extends StatelessWidget {
                   size: 25,
                   color: AppColors.darkPurple,
                 ),
-                onTap: (){
+                onTap: () {
                   AuthController.instance.signOut();
                 },
               )
             ],
           ),
         ),
-        body: const Center(
+        body: Padding(
+          padding: mainPaddingAll(scale: 0.7),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Home Page"),
+              Text(
+                "Select Your Department: ",
+                style: textHeaderStyle(),
+              ),
+              AppWidgets().gapH8(),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: teachers.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(AppRoutesConstant.teachersList,
+                                  arguments: [
+                                    teachers[index].department,
+                                    teachers[index].teachers
+                                  ]);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColors.grey, width: 1),
+                                  borderRadius: cornerRadius(20)),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: AppColors.textGrey,
+                                  ),
+                                  AppWidgets().gapW8(),
+                                  Expanded(
+                                    child: Text(
+                                      teachers[index].department,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: textHeaderStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColors.textGrey),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          AppWidgets().gapH(10)
+                        ],
+                      );
+                    }),
+              )
             ],
           ),
         ),
