@@ -12,7 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  String? email;
+
+  HomeScreen({super.key, this.email});
 
   final controller = Get.put(HomeController());
 
@@ -27,13 +29,15 @@ class HomeScreen extends StatelessWidget {
     );
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: AppColors.primaryColor,
+        ),
         drawer: Drawer(
           child: ListView(
             children: [
               DrawerHeader(
                 decoration:
-                    const BoxDecoration(color: AppColors.secondaryColor),
+                const BoxDecoration(color: AppColors.primaryColor),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -50,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     AppWidgets().gapH8(),
                     Text(
-                      "tridip@gmail.com",
+                      email!,
                       style: textRegularStyle(
                           color: AppColors.white,
                           fontSize: 22,
@@ -83,7 +87,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Select Your Department: ",
+                "Select Your Faculty: ",
                 style: textHeaderStyle(),
               ),
               AppWidgets().gapH8(),
@@ -91,48 +95,84 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: teachers.length,
                     itemBuilder: (context, index) {
+                      // String department=teachers[index].department;
+                      // List<Teacher> teacher=teachers[index].teachers;
                       return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Get.toNamed(AppRoutesConstant.teachersList,
-                                  arguments: [
-                                    teachers[index].department,
-                                    teachers[index].teachers
-                                  ]);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: AppColors.grey, width: 1),
-                                  borderRadius: cornerRadius(20)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: AppColors.textGrey,
-                                  ),
-                                  AppWidgets().gapW8(),
-                                  Expanded(
-                                    child: Text(
-                                      teachers[index].department,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: textHeaderStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w600,
-                                          color: AppColors.textGrey),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                          ExpansionTile(
+                            title: Text(
+                              teachers[index].faculty,
+                              style: textHeaderStyle(
+                                  fontSize: 24, fontWeight: FontWeight.w600),
                             ),
+                            children: [
+                              AppWidgets().gapH12(),
+                              ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, subIndex) {
+                                    String department = teachers[index]
+                                        .department[subIndex].deptName;
+                                    List<Teacher> teacher = teachers[index]
+                                        .department[subIndex].teachers;
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(
+                                            AppRoutesConstant.teachersList,
+                                            arguments: [
+                                              department,
+                                              teacher
+                                            ]);
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 4),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: AppColors.grey,
+                                                width: 1),
+                                            borderRadius: cornerRadius(20)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            const Icon(
+                                              Icons
+                                                  .arrow_forward_ios_rounded,
+                                              color: AppColors.textGrey,
+                                            ),
+                                            AppWidgets().gapW8(),
+                                            Expanded(
+                                              child: Text(
+                                                teachers[index]
+                                                    .department[subIndex]
+                                                    .deptName,
+                                                maxLines: 1,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                                style: textHeaderStyle(
+                                                    fontSize: 22,
+                                                    fontWeight:
+                                                    FontWeight.w600,
+                                                    color:
+                                                    AppColors.textGrey),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return AppWidgets().gapH12();
+                                  },
+                                  itemCount:
+                                  teachers[index].department.length),
+                              AppWidgets().gapH8(),
+                            ],
                           ),
-                          AppWidgets().gapH(10)
+                          AppWidgets().divider(),
                         ],
                       );
                     }),

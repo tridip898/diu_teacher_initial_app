@@ -96,6 +96,8 @@ class AppWidgets {
       color: AppColors.dividerColor,
       height: 10,
       thickness: 1,
+      indent: 20,
+      endIndent: 20,
     );
   }
 
