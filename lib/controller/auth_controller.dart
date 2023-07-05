@@ -34,7 +34,7 @@ class AuthController extends GetxController {
   _initialScreen(User? user) {
     if (user == null) {
       logger.i("Go to login page");
-      Get.offAll(() => SignInScreen());
+      Get.offAll(() => const AppSplashScreen());
     } else {
       logger.i("Go to home screen");
       Get.offAll(() => HomeScreen(email: user.email,));

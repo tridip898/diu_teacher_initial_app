@@ -97,11 +97,12 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       // String department=teachers[index].department;
                       // List<Teacher> teacher=teachers[index].teachers;
+                      logger.i("Length: ${controller.teacher.length}");
                       return Column(
                         children: [
                           ExpansionTile(
                             title: Text(
-                              teachers[index].faculty,
+                              controller.teacher[index].faculty,
                               style: textHeaderStyle(
                                   fontSize: 24, fontWeight: FontWeight.w600),
                             ),
@@ -111,18 +112,19 @@ class HomeScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemBuilder: (context, subIndex) {
-                                    String department = teachers[index]
-                                        .department[subIndex].deptName;
-                                    List<Teacher> teacher = teachers[index]
-                                        .department[subIndex].teachers;
+                                    String department = controller
+                                        .teacher[index]
+                                        .department[subIndex]
+                                        .deptName;
+                                    List<Teacher> teacher = controller
+                                        .teacher[index]
+                                        .department[subIndex]
+                                        .teachers;
                                     return GestureDetector(
                                       onTap: () {
                                         Get.toNamed(
                                             AppRoutesConstant.teachersList,
-                                            arguments: [
-                                              department,
-                                              teacher
-                                            ]);
+                                            arguments: [department, teacher]);
                                       },
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(
@@ -144,18 +146,13 @@ class HomeScreen extends StatelessWidget {
                                             AppWidgets().gapW8(),
                                             Expanded(
                                               child: Text(
-                                                teachers[index]
-                                                    .department[subIndex]
-                                                    .deptName,
+                                                department,
                                                 maxLines: 1,
-                                                overflow:
-                                                TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: textHeaderStyle(
                                                     fontSize: 22,
-                                                    fontWeight:
-                                                    FontWeight.w600,
-                                                    color:
-                                                    AppColors.textGrey),
+                                                    fontWeight: FontWeight.w600,
+                                                    color: AppColors.textGrey),
                                               ),
                                             ),
                                           ],
@@ -167,8 +164,8 @@ class HomeScreen extends StatelessWidget {
                                       (BuildContext context, int index) {
                                     return AppWidgets().gapH12();
                                   },
-                                  itemCount:
-                                  teachers[index].department.length),
+                                  itemCount: controller
+                                      .teacher[index].department.length),
                               AppWidgets().gapH8(),
                             ],
                           ),

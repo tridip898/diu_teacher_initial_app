@@ -126,7 +126,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
                                 ),
                                 child: Image.asset(
                                   teacher.image,
-                                  height: 70.h,
+                                  // height: 70.h,
                                   width: 60.w,
                                   fit: BoxFit.fitHeight,
                                 ),

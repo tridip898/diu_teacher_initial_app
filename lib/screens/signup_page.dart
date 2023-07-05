@@ -3,7 +3,6 @@ import 'package:diu_teacher_initial_app/constants/app_pages_constant.dart';
 import 'package:diu_teacher_initial_app/constants/app_style.dart';
 import 'package:diu_teacher_initial_app/constants/app_widgets.dart';
 import 'package:diu_teacher_initial_app/controller/auth_controller.dart';
-import 'package:diu_teacher_initial_app/controller/signup_controller.dart';
 import 'package:diu_teacher_initial_app/widgets/app_textfield.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

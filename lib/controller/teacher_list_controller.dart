@@ -9,7 +9,7 @@ class TeacherListController extends GetxController {
   RxInt selectedItem = (-1).obs;
 
   String dept = Get.arguments[0];
-  var teachers = Get.arguments[1].obs;
+  List<Teacher> teachers = Get.arguments[1].obs;
   var teacherFinal = Get.arguments[1];
 
   @override
@@ -38,6 +38,6 @@ class TeacherListController extends GetxController {
             .contains(enteredKeyword.toLowerCase());
       }).toList();
     }
-    teachers.value = results;
+    teachers = results;
   }
 }

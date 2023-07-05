@@ -1,4 +1,5 @@
 import 'package:diu_teacher_initial_app/constants/app_pages_constant.dart';
+import 'package:diu_teacher_initial_app/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -39,8 +40,12 @@ class _AppSplashScreenState extends State<AppSplashScreen>
     Future.delayed(const Duration(milliseconds: 3000), () {
       if(mounted) {
         setState(() {
-        Get.offNamed(AppRoutesConstant.login);
-      });
+          if (AuthController.instance.auth.currentUser != null) {
+            Get.offNamed(AppRoutesConstant.homePage);
+          } else {
+            Get.offNamed(AppRoutesConstant.login);
+          }
+        });
       }
     });
   }
