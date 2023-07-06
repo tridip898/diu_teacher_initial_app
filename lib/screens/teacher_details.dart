@@ -57,6 +57,7 @@ class TeacherDetailsPage extends StatelessWidget {
                   Text(
                     teacherData.designation,
                     style: textRegularStyle(fontSize: 25),
+                    textAlign: TextAlign.center,
                   ),
                   AppWidgets().gapH(2),
                   Text(

@@ -20,7 +20,6 @@ class _TeacherListPageState extends State<TeacherListPage> {
   // final teacherListController = Get.put(TeacherListController());
 
   final searchController = TextEditingController();
-
   // String dept = Get.arguments[0];
   // List<Teacher> teachers = Get.arguments[1];
   int selectedItem = (-1);
@@ -95,15 +94,15 @@ class _TeacherListPageState extends State<TeacherListPage> {
                     border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: AppColors.grey, width: 1),
-                        borderRadius: cornerRadius(20)),
+                        borderRadius: cornerRadius(12)),
                     enabledBorder: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: AppColors.grey, width: 1),
-                        borderRadius: cornerRadius(20)),
+                        borderRadius: cornerRadius(12)),
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                        const BorderSide(color: AppColors.grey, width: 1),
-                        borderRadius: cornerRadius(20)),
+                            const BorderSide(color: AppColors.grey, width: 1),
+                        borderRadius: cornerRadius(12)),
                   ),
                 ),
                 AppWidgets().gapH12(),
@@ -130,15 +129,12 @@ class _TeacherListPageState extends State<TeacherListPage> {
                                       ? AppColors.primaryColor
                                       : AppColors.grey,
                                   width: selectedItem == index ? 3 : 1),
-                              borderRadius: cornerRadius(20)),
+                              borderRadius: cornerRadius(12)),
                           padding: mainPaddingAll(scale: 0.2),
                           child: Row(
                             children: [
                               ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20),
-                                ),
+                                borderRadius: cornerRadius(12),
                                 child: Image.asset(
                                   teacher.image,
                                   // height: 70.h,
