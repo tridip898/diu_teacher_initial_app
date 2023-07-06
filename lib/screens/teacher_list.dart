@@ -20,9 +20,13 @@ class _TeacherListPageState extends State<TeacherListPage> {
   // final teacherListController = Get.put(TeacherListController());
 
   final searchController = TextEditingController();
-  String dept = Get.arguments[0];
-  List<Teacher> teachers = Get.arguments[1];
+
+  // String dept = Get.arguments[0];
+  // List<Teacher> teachers = Get.arguments[1];
   int selectedItem = (-1);
+  late String dept;
+  List<Teacher> teachers = [];
+  List<Teacher> filteredTeachers = [];
 
   @override
   void initState() {
@@ -30,6 +34,10 @@ class _TeacherListPageState extends State<TeacherListPage> {
     searchController.addListener(() {
       runFilter(searchController.text);
     });
+    final arguments = Get.arguments;
+    dept = arguments[0];
+    teachers = List<Teacher>.from(arguments[1]);
+    filteredTeachers = teachers;
   }
 
   @override
@@ -41,13 +49,17 @@ class _TeacherListPageState extends State<TeacherListPage> {
   void runFilter(String enteredKeyword) {
     List<Teacher> results = [];
     if (enteredKeyword.isEmpty) {
-      results = teachers;
+      setState(() {
+        results = teachers;
+      });
     } else {
-      results = teachers.where((dictionary) {
-        return (dictionary.name ?? "")
-            .toLowerCase()
-            .contains(enteredKeyword.toLowerCase());
-      }).toList();
+      setState(() {
+        results = filteredTeachers.where((dictionary) {
+          return (dictionary.teacherInitial ?? "")
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase());
+        }).toList();
+      });
     }
     teachers = results;
   }
@@ -74,16 +86,19 @@ class _TeacherListPageState extends State<TeacherListPage> {
               children: [
                 TextField(
                   controller: searchController,
+                  // onChanged: (value){
+                  //   runFilter(value);
+                  // },
                   decoration: InputDecoration(
                     hintText: "Search",
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                         borderSide:
-                        const BorderSide(color: AppColors.grey, width: 1),
+                            const BorderSide(color: AppColors.grey, width: 1),
                         borderRadius: cornerRadius(20)),
                     enabledBorder: OutlineInputBorder(
                         borderSide:
-                        const BorderSide(color: AppColors.grey, width: 1),
+                            const BorderSide(color: AppColors.grey, width: 1),
                         borderRadius: cornerRadius(20)),
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -137,7 +152,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      teacher.name,
+                                      "${teacher.name} (${(teacher.teacherInitial)})",
                                       style: textHeaderStyle(
                                           fontSize: 25,
                                           fontWeight: FontWeight.w600),

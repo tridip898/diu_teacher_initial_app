@@ -1104,7 +1104,7 @@ List<TeacherInitialModel> teachers = [
               dept: "Department of Computer Science and Engineering",
               email: "zahid.cse@diu.edu.bd",
               employID: "710001622",
-              teacherInitial: "BCD",
+              teacherInitial: "MZH",
               roomNo: "309-AB4",
               routine: [
                 Routine(
